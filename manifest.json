@@ -1,0 +1,50 @@
+{
+  "players": [{
+  	"laserdisc": [{
+      "brand": "pioneer",
+      "model": "HLD-X9",
+      "outputs": [{"name":"composite", "resolutions":["480i"]}, {"name": "s-video", "resolutions": ["480i"]}],
+      "settings": [
+        {"name": "Y/C", "values": ["C-WIDE", "NORMAL", "HR"]},
+        {"name": "3D.Y/C", "values": [0,1,2,3,4,5,6,7,8]},
+        {"name": "3D.YNR", "values": [0,1,2,3,4,5,6,7,8]},
+        {"name": "3D.CNR", "values": [0,1,2,3,4,5,6,7,8]}
+      ]
+    },
+    {
+      "brand": "pioneer",
+      "model": "CLD-R7G",
+      "outputs": [{"name":"composite", "resolutions":["480i"]}, {"name": "s-video", "resolutions": ["480i"]}],
+      "settings": []
+  }],
+    "muse": [{
+      "brand": "pioneer",
+      "model": "HLD-X9",
+      "outputs": [{"name":"muse", "resolutions":["1080i"]}],
+      "settings": []
+    }]
+  }],
+  "processors": [
+    {
+      "brand": "DVDO",
+      "model": "iScan VP50 Pro",
+      "inputs": ["composite", "s-video", "component", "hdmi"],
+      "outputs": [{"name": "hdmi", "resolutions": ["1080p"]}],
+      "settings": []
+    },
+    {
+      "brand": "Kramer",
+      "model": "VP-773AMP",
+      "inputs": ["composite"],
+      "outputs": [{"name": "hdmi", "resolutions": ["480i", "480p", "1080p"]}],
+      "settings": []
+    },
+    {
+      "brand": "Panasonic",
+      "model": "TU-AHD100",
+      "inputs": ["muse"],
+      "outputs": [{"name": "component", "resolutions": ["1080i"]},{"name": "rgb", "resolutions": ["1080i"]}],
+      "settings": []
+    }
+  ]
+}
