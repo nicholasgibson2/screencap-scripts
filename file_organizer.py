@@ -32,7 +32,7 @@ def organize_files():
 
     # Create directory for player type
     BASE_DIRECTORY_PATH = (
-        os.getcwd()
+        os.getcwd() + "/screencaps"
     )  # Sets the base directory path to the current working directory
     player_type_dir = os.path.join(BASE_DIRECTORY_PATH, player_type)
     os.makedirs(player_type_dir, exist_ok=True)
