@@ -1,6 +1,24 @@
 import json
 import os
 import urllib.parse
+import shutil
+import glob
+import logging
+
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
+
+def move_mp4_files(src_directory, dst_directory):
+    files = glob.glob(os.path.join(src_directory, "*.MP4"))
+    for file in files:
+        try:
+            print(f"Moving file {file} to {dst_directory}")
+            shutil.move(file, dst_directory)
+            print(f"Successfully moved file {file}")
+        except Exception as e:
+            print(f"Error occurred while moving file {file}. Error: {str(e)}")
 
 
 def encode_filename(filename):
@@ -31,11 +49,10 @@ def organize_files():
     player_type = get_user_input("Select player type: ", player_type_choices)
 
     # Create directory for player type
-    BASE_DIRECTORY_PATH = (
-        os.getcwd() + "/screencaps"
-    )  # Sets the base directory path to the current working directory
+    BASE_DIRECTORY_PATH = "/screencap/movies/Video Essentials"
     player_type_dir = os.path.join(BASE_DIRECTORY_PATH, player_type)
     os.makedirs(player_type_dir, exist_ok=True)
+    logging.debug(f"Created directory {player_type_dir}")
 
     # Get player brand/model
     player_brand_model_choices = [
@@ -50,7 +67,7 @@ def organize_files():
     # Create directory for player brand/model
     player_brand_model_dir = os.path.join(player_type_dir, player_brand_model)
     os.makedirs(player_brand_model_dir, exist_ok=True)
-
+    logging.debug(f"Created directory {player_brand_model_dir}")
     # Get player settings
     player = next(
         player
@@ -77,7 +94,7 @@ def organize_files():
         player_brand_model_dir, encode_filename(player_settings)
     )
     os.makedirs(player_settings_dir, exist_ok=True)
-
+    logging.debug(f"Created directory {player_settings_dir}")
     # Get player output and resolution
     player_output_choices = [output["name"] for output in player["outputs"]]
     player_output = get_user_input("Select player output: ", player_output_choices)
@@ -101,7 +118,7 @@ def organize_files():
         encode_filename(f"{player_output}_{player_output_resolution}"),
     )
     os.makedirs(player_output_resolution_dir, exist_ok=True)
-
+    logging.debug(f"Created directory {player_output_resolution_dir}")
     # Initialize processor chain
     processor_chain = []
 
@@ -124,6 +141,7 @@ def organize_files():
             current_directory, processor_brand_model
         )
         os.makedirs(processor_brand_model_dir, exist_ok=True)
+        logging.debug(f"Created directory {processor_brand_model_dir}")
 
         # Get processor settings
         processor = next(
@@ -152,7 +170,7 @@ def organize_files():
             processor_brand_model_dir, encode_filename(processor_settings)
         )
         os.makedirs(processor_settings_dir, exist_ok=True)
-
+        logging.debug(f"Created directory {processor_settings_dir}")
         # Get processor output and resolution
         processor_output_choices = [output["name"] for output in processor["outputs"]]
         processor_output = get_user_input(
@@ -178,7 +196,7 @@ def organize_files():
             encode_filename(f"{processor_output}_{processor_output_resolution}"),
         )
         os.makedirs(processor_output_resolution_dir, exist_ok=True)
-
+        logging.debug(f"Created directory {processor_output_resolution_dir}")
         # Add processor to chain
         processor_chain.append(
             (
@@ -203,6 +221,8 @@ def organize_files():
         current_directory = processor_output_resolution_dir
 
     print("Directories created successfully")
+    src_directory = "/screencap/video_stage"
+    move_mp4_files(src_directory, processor_output_resolution_dir)
 
 
 def main():
