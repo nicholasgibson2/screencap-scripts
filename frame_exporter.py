@@ -33,6 +33,7 @@ def export_frames(video_path):
 
 
 if __name__ == "__main__":
-    # video_path = "videos/ve_svideo.MP4"
-    video_path = "videos/ve_composite.MP4"
+    # video_path = "../videos/ve_svideo.MP4"
+    video_path = "../videos/okinawa_ld.MP4"
+    # video_path = "../videos/okinawa_muse.MP4"
     export_frames(video_path)

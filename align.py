@@ -2,8 +2,10 @@ import cv2
 import numpy as np
 
 # Open the image files.
-img1_color = cv2.imread("../images/okinawa_muse.png")  # Image to be aligned.
-img2_color = cv2.imread("../images/okinawa_ld.png")  # Reference image.
+# img1_color = cv2.imread("../images/okinawa_muse.png")  # Image to be aligned.
+# img2_color = cv2.imread("../images/okinawa_ld.png")  # Reference image.
+img2_color = cv2.imread("output_images/ld/scene_17_frame.png")  # Reference image.
+img1_color = cv2.imread("output_images/muse/scene_17_frame.png")  # Image to be aligned.
 
 # Convert to grayscale.
 img1 = cv2.cvtColor(img1_color, cv2.COLOR_BGR2GRAY)
@@ -50,4 +52,4 @@ homography, mask = cv2.findHomography(p1, p2, cv2.RANSAC)
 transformed_img = cv2.warpPerspective(img1_color, homography, (width, height))
 
 # Save the output.
-cv2.imwrite("output.png", transformed_img)
+cv2.imwrite("output_images/aligned3.png", transformed_img)
