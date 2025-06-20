@@ -10,7 +10,7 @@ nltk.download("words")
 english_vocab = set(words.words())
 
 
-def extract_text_from_video(video_path, start_time=0):
+def extract_text_from_video(video_path, output_dir, start_time=0):
     """
     Extract text from video frames starting at specified time.
 
@@ -18,8 +18,6 @@ def extract_text_from_video(video_path, start_time=0):
         video_path (str): Path to the video file
         start_time (float): Start time in seconds (default: 0)
     """
-    output_dir = "frames_with_text"
-    os.makedirs(output_dir, exist_ok=True)
 
     cap = cv2.VideoCapture(video_path)
     frame_interval = 0.25  # seconds between frames
@@ -72,14 +70,6 @@ def extract_text_from_video(video_path, start_time=0):
 
 # Usage examples:
 if __name__ == "__main__":
-    # video_path = "./mtv_4.mp4"
-
-    # Start from beginning (default)
-    extract_text_from_video(video_path)
-    # extract_text_from_video(video_path, start_time=4049)
-
-    # Start from 30 seconds
-    # extract_text_from_video(video_path, start_time=30)
-
-    # Start from 2 minutes and 15 seconds
-    # extract_text_from_video(video_path, start_time=135)
+    video_path = "./mtv_4.mp4"
+    output_dir = "./frames_with_text"
+    extract_text_from_video(video_path, output_dir)
